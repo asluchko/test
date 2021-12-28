@@ -1,0 +1,58 @@
+info:
+  name: test_deploy
+  title: test_deploy
+  description: test_deploy
+  version: 1.0.0
+connector:
+  id: http
+  resource:
+    path: '/test_deploy/:testparam'
+    method: GET
+    paramsSchema: |-
+      {
+        "type": "object",
+        "required": [
+          "testparam"
+        ],
+        "properties": {
+          "testparam": {
+            "type": "string"
+          }
+        }
+      }
+  tracing:
+    enabled: true
+    req:
+      body: true
+      headers: true
+    res:
+      body: true
+      headers: true
+  tagHeaders: []
+  skipParsing: false
+flow:
+  execute:
+    - setResponse:
+        id: f150ed2d-07fe-415a-aab4-406ca43e7bec
+        title: '[Set Response]'
+        description: '[Set response status, headers and body]'
+        terminateFlow: false
+        status: '200'
+        body: '"Welocme"'
+tags: []
+documentation:
+  swagger: '2.0'
+  paths:
+    '/test_deploy/{testparam}':
+      get:
+        parameters:
+          - in: path
+            name: testparam
+            required: true
+            type: string
+        responses:
+          '200':
+            description: OK
+            schema:
+              type: string
+id: 1a3d933d-6c13-4274-9c60-242d4d1b3e8e
